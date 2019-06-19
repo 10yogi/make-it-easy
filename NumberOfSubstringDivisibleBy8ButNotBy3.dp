@@ -1,0 +1,60 @@
+/*input
+1
+3
+888
+*/
+#include<bits/stdc++.h>
+using namespace std;
+
+typedef long long ll ;
+typedef pair<int,int> pii;
+typedef pair<ll,ll>   pll;
+
+#define err(l,a1) cerr<<"debug : "<<l<<" arg : "<<a1<<endl; 
+
+#define pb push_back
+#define mp make_pair
+#define fs first 
+#define mems(m,b) memset(m,b,sizeof(m));
+#define all(v) v.begin(),v.end()
+#define ss second
+#define rep(i,a,b) for(int i = a;i<b;i++)
+#define repr(i,a,b) for(int i = a;i>=b;--i)
+#define sd(x) scanf("%d",&x);
+
+#define mod 1000000007
+#define maxn 10050
+#define fast ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+
+int T=1;
+char number[maxn];
+int n;
+int dp[maxn][8][3];
+
+int main(){
+  //fast 
+  cin>>T; 
+  while(T--){
+    cin>>n;
+    memset(dp,0,sizeof dp);
+    cin>>number;
+    int digit = (int)(number[0]-'0');
+    dp[0][digit%8][digit%3] = 1;
+    
+    for(int i = 1;i<n;++i){
+      digit = (int)(number[i]-'0');
+      for(int j = 0;j<8;++j){
+        for(int k = 0;k<3;++k){
+          dp[i][(j*10+digit)%8][(k*10+digit)%3] += dp[i-1][j][k];
+        }
+      }
+      dp[i][digit%8][digit%3] += 1; 
+    }
+    int ans = 0;
+    for(int i = 0;i<n;++i){
+      ans += dp[i][0][1]+dp[i][0][2];
+    }
+    cout<<ans<<'\n';    
+  }  
+return 0;
+}
