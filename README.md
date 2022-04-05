@@ -1,3 +1,3 @@
-# makeITeasy
+# Make IT Easy
 
-this is collection of good dp problems with solutions 
+The goal is to move from complicated to complex and then to simple.
